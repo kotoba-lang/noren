@@ -15,16 +15,39 @@ I/O は 1 バイトも無い。取得も送信も課金もしない —— そ�
 
 | ns | 答える問い |
 |---|---|
+| `noren.discovery` | この事業者を名簿に載せてよいか（OSM タグ → 業種 / LLM 抽出の原文照合 / DiscoveryGovernor） |
 | `noren.prospect` | この事業者に、いま接触してよいか（業種 gate / 特定電子メール法 3 条 1 項 4 号の形 / 観測の鮮度） |
 | `noren.diagnose` | その公開面は、店の仕事をどれだけ引き受けられているか |
 | `noren.prescribe` | 直すのか建て替えるのか。**測った軸だけで**何を言えるか |
-| `noren.governor` | その提案を外へ出してよいか（HARD 10 / SOFT 2） |
+| `noren.governor` | その提案を外へ出してよいか（HARD 11 / SOFT 2） |
 | `noren.build` | 貰った事実だけで面を建てる |
 | `noren.plan` | 月額いくらで、何が付いていて、今日その capability を使ってよいか |
 
 **UI 品質は測り直していない。** `kotoba-lang/design-quality` が HIG/WCAG の
 12 軸を持っているので、`noren.diagnose` は同じ `{:id :title :weight :check}` の
 形で presence 軸を足すだけで、重み正規化も finding 収集も機構ごと借りる。
+
+## 発見に LLM を使うときの 2 つの分離（`noren.discovery`）
+
+発見を自動化すると「ホスト名から業種を推測して売る」に落ちる。その推測を消すのが
+この名前空間で、解き方は 2 つの分離である。
+
+**1. 業種は OSM のタグから決める。** `amenity=restaurant` は誰かが現地を見て付けた
+宣言で、こちらの推測ではない。タグ → ISIC は `osm-tag->isic` に**表として**書いて
+あり導出しない。証拠は OSM の element id で、第三者が
+`https://www.openstreetmap.org/node/…` を開いて確かめられる。チェーン店舗
+（`brand:wikidata` 等）は candidate にしない —— `website` が本部を指すため
+（実測 2026-08-11、神楽坂 387 件中 19 件）。
+
+**2. LLM は抽出しかしない。判定しない。** murakumo-main が読むのは相手のページ本文で、
+返してよいのは**本文にそのまま在る文字列**（店名・アドレス・その周辺の一文・受信拒否の
+文言）だけ。`verify-extraction` が 1 つずつ原文に照合し、**verbatim で見つからない主張は
+落とす**。落とした値は捨てず `:dropped` に残す（モデルを替えたとき、抽出が良くなったのか
+照合が緩んだのかを区別するため）。
+
+したがって**発見の健全性はモデルの性能に依存しない** —— 依存しているのは照合であって
+推論ではない。モデルの判断に属する項目（`:kind` / `:own-site?` / `:confidence`）だけは
+照合できないので、DiscoveryGovernor が閾値と HARD rule で受け止める。
 
 ## 3 つの規律
 
@@ -81,5 +104,5 @@ nbb --classpath "src:test:../design-quality/src:../jp-go-digital-design-system/s
 clojure -M:test    # 同じ .cljc を JVM でも
 ```
 
-9 tests / 67 assertions。HARD rule は 10 本すべて「実際に `:hold` になること」を
-1 本ずつ壊して確かめている。
+17 tests / 116 assertions。接触の HARD rule 11 本と DiscoveryGovernor の
+reject 条件は、すべて「実際に止まること」を 1 つずつ壊して確かめている。

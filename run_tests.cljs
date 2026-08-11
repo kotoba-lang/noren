@@ -4,7 +4,7 @@
 ;;   nbb --classpath "src:test:../design-quality/src:../jp-go-digital-design-system/src:../html/src" run_tests.cljs
 ;;
 ;; JVM 側は `clojure -M:test`（同じ .cljc を走らせる）。
-(require '[clojure.test :as t] 'noren.noren-test)
+(require '[clojure.test :as t] 'noren.noren-test 'noren.discovery-test)
 
-(let [{:keys [fail error]} (t/run-tests 'noren.noren-test)]
+(let [{:keys [fail error]} (t/run-tests 'noren.noren-test 'noren.discovery-test)]
   (js/process.exit (if (pos? (+ fail error)) 1 0)))
