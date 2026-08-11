@@ -1,0 +1,18 @@
+{:paths ["src"]
+ ;; 第三者ランタイム依存ゼロ。workspace 内の 3 つだけを sibling checkout で引く
+ ;; （west が両方 orgs/kotoba-lang/ に展開するので相対パスが解決する）。
+ :deps {io.github.kotoba-lang/design-quality {:local/root "../design-quality"}
+        io.github.kotoba-lang/jp-go-digital-design-system {:local/root "../jp-go-digital-design-system"}
+        io.github.kotoba-lang/html {:local/root "../html"}
+        ;; jp-go-dds が引く（css.core）。推移依存を明示で置く —— 置かないと
+        ;; nbb の classpath を組むときに毎回落ちて原因を探すことになる。
+        io.github.kotoba-lang/css {:local/root "../css"}}
+ :aliases
+ {:test {:extra-paths ["test"]
+         :extra-deps {io.github.cognitect-labs/test-runner
+                      {:git/tag "v0.5.1" :git/sha "dfb30dd"}}
+         :main-opts ["-m" "cognitect.test-runner"]
+         :exec-fn cognitect.test-runner.api/test}
+  :lint {:replace-deps {clj-kondo/clj-kondo {:mvn/version "2024.11.14"}}
+         :main-opts ["-m" "clj-kondo.main" "--lint" "src" "test"
+                     "--fail-level" "error"]}}}
