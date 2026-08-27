@@ -22,7 +22,6 @@
 (def eligible-isic
   "接触してよい ISIC class → 何を売る面か。"
   {"5610" {:label "restaurants and mobile food service" :surface :storefront}
-   "5613" {:label "take-away food service"              :surface :storefront}
    "5629" {:label "other food service activities"       :surface :storefront}
    "5630" {:label "beverage serving activities"         :surface :storefront}
    "4791" {:label "retail sale via internet"            :surface :catalog}

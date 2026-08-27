@@ -173,3 +173,11 @@
       (is (= {:kind :common-crawl} (get-in p [:prospect/evidence :evidence/text-source])))
       (is (some? (get-in p [:prospect/evidence :evidence/raw-reply]))
           "生返答を残す —— parser を直したときに引き直せるのはこれがある場合だけ"))))
+
+(deftest fast-food-is-5610-because-5613-does-not-exist
+  (testing "5613 は ISIC のどの版にも無い符号（org-un-isic: rev5 463 / rev4-mirror 428）"
+    (is (= "5610" (get d/osm-tag->isic ["amenity" "fast_food"])))
+    (is (not (some #{"5613"} (vals d/osm-tag->isic))))
+    (is (= "5610" (d/osm-tags->isic {"amenity" "fast_food"}))))
+  (testing "表の全符号が eligible-isic に在る（『blueprint が実在する業種に限る』）"
+    (is (every? #(contains? prospect/eligible-isic %) (vals d/osm-tag->isic)))))

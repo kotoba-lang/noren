@@ -34,11 +34,19 @@
   "OSM のタグ → ISIC Rev.5。**`noren.prospect/eligible-isic` の部分集合だけを
   載せる。** ここに無いタグの POI は candidate にならない（`:isic-not-declared`）。
 
-  `fast_food` を 5613（take-away）に、`bar`/`pub` を 5630（beverage serving）に
-  分けてあるのは、処方の surface が変わるから —— 持ち帰り主体の店に
-  『営業時間が無い』と言うのと、バーに言うのとでは重みが違う。"
+  `bar`/`pub` を 5630（beverage serving）に分けてあるのは、処方の surface が
+  変わるから —— 持ち帰り主体の店に『営業時間が無い』と言うのと、バーに言うのとでは
+  重みが違う。
+
+  ⚠ **`fast_food` は 5610。** 2026-08-27 まで `5613`（take-away）に写していたが、
+  **5613 は ISIC のどの版にも存在しない** —— `cloud-itonami/org-un-isic` の
+  pin 済み Rev.5（463 class）にも、Rev.4 mirror（428 class）にも無い。
+  両版とも 5610 の題名は「Restaurants and mobile food service activities」で、
+  持ち帰りはそこに含まれる。`cloud-itonami-isic-5613` という repo も存在せず、
+  下の `eligible-isic` が『blueprint actor が実在する業種に限る』と書いている
+  条件を、この 1 行だけが満たしていなかった。"
   {["amenity" "restaurant"] "5610"
-   ["amenity" "fast_food"]  "5613"
+   ["amenity" "fast_food"]  "5610"
    ["amenity" "cafe"]       "5610"
    ["amenity" "bar"]        "5630"
    ["amenity" "pub"]        "5630"
