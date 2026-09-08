@@ -9,7 +9,7 @@
 
   綺麗だが電話番号も営業時間も無いページは、UI 軸では高得点になる。
   だから presence を UI より重く置く（0.55 / 0.45）。"
-  (:require [clojure.string :as str]
+  (:require [kotoba.lang.text :as str]
             [design-quality.audit :as dq]))
 
 (defn ^:private has? [s re] (boolean (re-find re s)))
@@ -34,7 +34,7 @@
     (into
      [{:id :https :title "HTTPS で配信されている" :weight 0.12
        :check (fn [_]
-                (if (and url (str/starts-with? (str/lower-case url) "https://"))
+                (if (and url (str/starts-with? (str/lower url) "https://"))
                   {:score 1.0}
                   {:score 0.0 :finding "HTTPS ではない — ブラウザが警告を出し、フォームは事実上使えない"}))}
 

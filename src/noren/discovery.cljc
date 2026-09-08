@@ -25,7 +25,7 @@
   「その店は良い店か」「連絡すべきか」—— 前者は測らない、後者は
   `noren.prospect` と `noren.governor`。ここは candidate を prospect の形にする
   までで、接触の可否はその先で改めて全部かかる。"
-  (:require [clojure.string :as str]
+  (:require [kotoba.lang.text :as str]
             [clojure.edn :as edn]))
 
 ;; ── OSM タグ → ISIC（表。導出しない）────────────────────────────────────
@@ -187,7 +187,7 @@
   —— 畳むほど『原文に在る』の意味が緩む。"
   [s]
   (some-> s
-          str/lower-case
+          str/lower
           (str/replace #"[　\s]+" " ")
           (str/replace #"[！-～]" (fn [c] (str (char (- (code-point-at-0 c) 0xFEE0)))))
           str/trim))

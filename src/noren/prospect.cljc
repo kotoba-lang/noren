@@ -11,7 +11,7 @@
   1. `industry-eligible?` — 売る相手の業種か（ISIC gate）
   2. `contactable?`       — 特定電子メール法の例外に**実測で**当たるか
   3. `fresh?`             — 観測がまだ有効か（古い観測で今日の判断をしない）"
-  (:require [clojure.string :as str]))
+  (:require [kotoba.lang.text :as str]))
 
 ;; ── 業種 gate ────────────────────────────────────────────────────────────
 ;;
@@ -116,7 +116,7 @@
   "同じ事業者を 2 回接触しないための鍵。host で畳む（`www.` と scheme の揺れを吸収）。"
   [{:prospect/keys [site-url]}]
   (some-> site-url
-          str/lower-case
+          str/lower
           (str/replace #"^https?://" "")
           (str/replace #"^www\." "")
           (str/split #"[/?#]") first

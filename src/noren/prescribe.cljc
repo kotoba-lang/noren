@@ -9,7 +9,7 @@
   誇張が禁じられているのは行儀の問題ではない。相手のサイトについて外から
   断定できるのは測った軸だけで、それ以外は推測であり、推測を根拠に売るのは
   この loop が最初にやってはいけないことである。"
-  (:require [clojure.string :as str]))
+  (:require [kotoba.lang.text :as str]))
 
 (def ^:private claim-templates
   "軸 id → 測定結果を述べる文。**改善の約束ではなく観測の報告**にする。"

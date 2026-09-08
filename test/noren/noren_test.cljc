@@ -1,6 +1,6 @@
 (ns noren.noren-test
   (:require [clojure.test :refer [deftest is testing]]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             [noren.prospect :as prospect]
             [noren.diagnose :as diagnose]
             [noren.prescribe :as prescribe]

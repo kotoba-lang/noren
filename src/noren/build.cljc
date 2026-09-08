@@ -18,7 +18,7 @@
   UI 基盤は `jp-go-dds`（workspace の base design system）。app-css が足すのは
   DADS が持たない層 —— safe-area / dvh / tap-target / focus ring / reduced-motion
   —— だけで、色も間隔も DADS の token をそのまま引く。"
-  (:require [clojure.string :as str]
+  (:require [kotoba.lang.text :as str]
             [jp-go-dds.core :as dds]
             [jp-go-dds.page :as page]))
 
