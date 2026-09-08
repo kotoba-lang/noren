@@ -1,6 +1,6 @@
 (ns noren.discovery-test
   (:require [clojure.test :refer [deftest is testing]]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             [noren.discovery :as d]
             [noren.prospect :as prospect]))
 

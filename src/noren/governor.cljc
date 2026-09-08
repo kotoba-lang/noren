@@ -25,7 +25,7 @@
   | `:opt-out-missing`          | 本文に受信拒否の方法が無い |
   | `:outcome-promise`          | 測れない成果を約束している |
   | `:asset-reuse`              | 相手の画像・ロゴを生成物へ複製している |"
-  (:require [clojure.string :as str]
+  (:require [kotoba.lang.text :as str]
             [noren.prospect :as prospect]
             [noren.prescribe :as prescribe]))
 
