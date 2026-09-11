@@ -1,7 +1,7 @@
 #!/usr/bin/env nbb
-;; nbb run_tests.cljs — noren のテスト（第一の runtime は cljs / nbb）
+;; nbb run_tests.cljk — noren のテスト（第一の runtime は cljs / nbb）
 ;;
-;;   nbb --classpath "src:test:../design-quality/src:../jp-go-digital-design-system/src:../html/src" run_tests.cljs
+;;   nbb --classpath "src:test:../design-quality/src:../jp-go-digital-design-system/src:../html/src" run_tests.cljk
 ;;
 ;; JVM 側は `clojure -M:test`（同じ .cljc を走らせる）。
 (require '[clojure.test :as t] 'noren.noren-test 'noren.discovery-test)
