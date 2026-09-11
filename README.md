@@ -100,8 +100,8 @@ HARD で止める。検査に必要な材料が無いことは、検査に通っ
 ## テスト
 
 ```bash
-nbb --classpath "src:test:../design-quality/src:../jp-go-digital-design-system/src:../html/src:../css/src" run_tests.cljk
-clojure -M:test    # 同じ .cljc を JVM でも
+kbb --backend sci --classpath "src:test:../design-quality/src:../jp-go-digital-design-system/src:../html/src:../css/src" run_tests.cljk
+kbb -M:test    # 同じ .cljc を JVM でも
 ```
 
 17 tests / 116 assertions。接触の HARD rule 11 本と DiscoveryGovernor の
