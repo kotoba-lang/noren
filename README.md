@@ -100,7 +100,7 @@ HARD で止める。検査に必要な材料が無いことは、検査に通っ
 ## テスト
 
 ```bash
-nbb --classpath "src:test:../design-quality/src:../jp-go-digital-design-system/src:../html/src:../css/src" run_tests.cljs
+nbb --classpath "src:test:../design-quality/src:../jp-go-digital-design-system/src:../html/src:../css/src" run_tests.cljk
 clojure -M:test    # 同じ .cljc を JVM でも
 ```
 
