@@ -26,7 +26,7 @@
   `noren.prospect` と `noren.governor`。ここは candidate を prospect の形にする
   までで、接触の可否はその先で改めて全部かかる。"
   (:require [kotoba.lang.text :as str]
-            [clojure.edn :as edn]))
+            [kotoba.lang.edn :as edn]))
 
 ;; ── OSM タグ → ISIC（表。導出しない）────────────────────────────────────
 
