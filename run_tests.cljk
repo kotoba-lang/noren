@@ -4,7 +4,7 @@
 ;;   kbb --backend sci --classpath "src:test:../design-quality/src:../jp-go-digital-design-system/src:../html/src" run_tests.cljk
 ;;
 ;; JVM 側は `kbb -M:test`（同じ .cljc を走らせる）。
-(require '[clojure.test :as t] 'noren.noren-test 'noren.discovery-test)
+(require '[kotoba.test :as t] 'noren.noren-test 'noren.discovery-test)
 
 ;; The exit code comes from the :end-run-tests report hook, NOT from the return
 ;; value of `run-tests`. Under nbb that value is nil, so the previous spelling
