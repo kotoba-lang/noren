@@ -2,7 +2,7 @@
 
 **暖簾（のれん）—— 店が外に掛けている面のこと。この repo は、事業者の公開面を
 「測る・処方する・建てる」判断そのもの**を持つ純 `.cljc` ライブラリである。
-名前が機能を示さないので最初に名乗る（superproject `CLAUDE.md` の規約）。
+名前が機能を示さないので最初に名乗る（superproject `AGENTS.md` の規約）。
 
 I/O は 1 バイトも無い。取得も送信も課金もしない —— それを回すのは
 [`cloud-itonami/loop-noren`](https://github.com/cloud-itonami/loop-noren) で、
